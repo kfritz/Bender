@@ -106,10 +106,14 @@ namespace Bend
             };
 
         private static TimeSpan disconnectingTimeout = TimeSpan.FromSeconds(5);
+        private static TimeSpan whitespaceKeepAlivePeriod = TimeSpan.FromMinutes(5);
+
+        private const string whiteSpaceKeepAliveToken = " ";
 
         private MultiObserver<XElement> multiObserver = new MultiObserver<XElement>();
 
         private Timer disconnectingTimer;
+        private Timer whiteSpaceKeepAliveTimer;
         private State state = State.Disconnected;
         private ManualResetEvent connectedEvent = new ManualResetEvent(false);
         private ManualResetEvent disconnectedEvent = new ManualResetEvent(false);
@@ -149,6 +153,8 @@ namespace Bend
             this.originalJid = jid;
             this.password = password;
             this.endPoint = endPoint;
+
+            this.whiteSpaceKeepAliveTimer = new Timer(OnWhiteSpaceKeepAlive);
         }
 
         public void Connect()
@@ -203,6 +209,8 @@ namespace Bend
         {
             element.WriteTo(this.xmlWriter);
             this.xmlWriter.Flush();
+
+            this.ResetWhiteSpaceKeepAlive();
         }
 
         private async void StartReadLoopAsync()
@@ -353,6 +361,17 @@ namespace Bend
 	        }
         }
 
+        private void ResetWhiteSpaceKeepAlive()
+        {
+            this.whiteSpaceKeepAliveTimer.Change(whitespaceKeepAlivePeriod, whitespaceKeepAlivePeriod);
+        }
+
+        private void OnWhiteSpaceKeepAlive(object state)
+        {
+            this.xmlWriter.WriteWhitespace(whiteSpaceKeepAliveToken);
+            this.xmlWriter.Flush();
+        }
+
         #region State Machine
 
         private void TransitionToStreamStart()
@@ -408,6 +427,8 @@ namespace Bend
             this.AssertAndDoTransitionTo(State.Connected);
 
             this.connectedEvent.Set();
+
+            this.ResetWhiteSpaceKeepAlive();
         }
 
         private void TransitionToLocalDisconnect()
@@ -446,7 +467,10 @@ namespace Bend
              * http://xmpp.org/rfcs/rfc6120.html#streams-close
              */
 
+            // TODO: need to reinitialize all the disposables if we reconnnect later
+
             this.DisposeDisconnectingTimer();
+            this.DisposeWhiteSpaceKeepAliveTimer();
 
             this.AssertAndDoTransitionTo(State.Disconnected);
 
@@ -507,6 +531,15 @@ namespace Bend
             {
                 this.disconnectingTimer.Dispose();
                 this.disconnectingTimer = null;
+            }
+        }
+
+        private void DisposeWhiteSpaceKeepAliveTimer()
+        {
+            if (this.whiteSpaceKeepAliveTimer.IsNotNull())
+            {
+                this.whiteSpaceKeepAliveTimer.Dispose();
+                this.whiteSpaceKeepAliveTimer = null;
             }
         }
 
