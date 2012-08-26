@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="agsXMPP">
-      <HintPath>Library\agsXMPP.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\Newtonsoft.Json.dll</HintPath>
     </Reference>
