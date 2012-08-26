@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bender", "Bender\Bender.csproj", "{CBE43CE6-FFCD-4B1B-8622-226F50A91101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bent.Common", "Bent.Common\Bent.Common.csproj", "{0C907D81-0408-4C0A-A361-5FCB84071124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bend", "Bend\Bend.csproj", "{52D97202-53E0-4380-BF00-CB5E1FEBCF60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C907D81-0408-4C0A-A361-5FCB84071124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C907D81-0408-4C0A-A361-5FCB84071124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C907D81-0408-4C0A-A361-5FCB84071124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C907D81-0408-4C0A-A361-5FCB84071124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D97202-53E0-4380-BF00-CB5E1FEBCF60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D97202-53E0-4380-BF00-CB5E1FEBCF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D97202-53E0-4380-BF00-CB5E1FEBCF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D97202-53E0-4380-BF00-CB5E1FEBCF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE43CE6-FFCD-4B1B-8622-226F50A91101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE43CE6-FFCD-4B1B-8622-226F50A91101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE43CE6-FFCD-4B1B-8622-226F50A91101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE43CE6-FFCD-4B1B-8622-226F50A91101}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
